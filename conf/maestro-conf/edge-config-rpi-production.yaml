@@ -79,7 +79,7 @@ mdns:
 symphony:
 # symphony system management APIs
     # defaults to 10:
-    DisableSysStats: true
+    disable_sys_stats: true
     sys_stats_count_threshold: 15     # send if you have 15 or more stats queued
     sys_stats_time_threshold: 120000  # every 120 seconds send stuff, no matter what
     client_cert: "{{ARCH_CLIENT_CERT_PEM}}"
