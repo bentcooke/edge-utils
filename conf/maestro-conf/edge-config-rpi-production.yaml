@@ -55,13 +55,6 @@ devicedb_conn_config:
     devicedb_bucket: "lww" #default bucket
     relay_id: "{{ARCH_DEVICE_ID}}" #default relay id
     ca_chain: "{{SSL_CERTS_PATH}}/ca-chain.cert.pem" #default chain cert file name     
-sys_stats: # system stats intervals
-  vm_stats:
-    every: "15s"
-    name: vm
-  disk_stats:
-    every: "30s"
-    name: disk
 mdns:
   # disable: true
   static_records:
@@ -86,6 +79,7 @@ mdns:
 symphony:
 # symphony system management APIs
     # defaults to 10:
+    disable_sys_stats: true
     sys_stats_count_threshold: 15     # send if you have 15 or more stats queued
     sys_stats_time_threshold: 120000  # every 120 seconds send stuff, no matter what
     client_cert: "{{ARCH_CLIENT_CERT_PEM}}"
