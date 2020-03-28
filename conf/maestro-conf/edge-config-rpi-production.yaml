@@ -11,6 +11,8 @@ watchdog:
 network:
     interfaces:
         - if_name: eth0
+          existing: override
+          clear_addresses: true
           dhcpv4: true
           # set the mac addresses for this interface also:
           hw_addr: "{{ARCH_ETHERNET_MAC}}"
