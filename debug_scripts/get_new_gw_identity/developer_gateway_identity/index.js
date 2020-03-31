@@ -30,6 +30,7 @@ program
   .option('-g, --gatewayServicesAddress []', 'The gateway services API address')
   .option('-a, --apiServerAddress []', 'API server address')
   .option('-p, --serialNumberPrefix []', 'Serial Number Prefix')
+  .option('-s, --serialNumber []', 'Gateway serial number')
   .option('-o, --organizationUnit []', 'Account ID', uuid.v4().replace(/-/g, ""))
   .option('--temp-cert-dir []', 'Directory that contains the temporary certs', './temp_certs')
   .option('--script-dir []', 'Directory that contains the generate_self_signed_certs.sh script', '.')
@@ -176,7 +177,9 @@ const run = async() => {
     let identity_obj = {};
 
     let currentSerialNumber = crypto.randomBytes(2).readUInt16BE(0, true);
-    identity_obj.serialNumber = IDGenerator.SerialIDGenerator(program.serialNumberPrefix || 'SOFT', currentSerialNumber, currentSerialNumber + 1);
+    identity_obj.serialNumber = typeof program.serialNumber == 'string' ?
+                                    program.serialNumber :
+                                    IDGenerator.SerialIDGenerator(program.serialNumberPrefix || 'SOFT', currentSerialNumber, currentSerialNumber + 1);
     identity_obj.OU = program.organizationUnit;
     identity_obj.deviceID = program.internalId;
     identity_obj.hardwareVersion = "rpi3bplus";
