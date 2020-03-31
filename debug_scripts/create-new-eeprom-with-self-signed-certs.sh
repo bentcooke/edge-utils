@@ -33,6 +33,7 @@ getEdgeStatus() {
 readEeprom() {
   if [ -f ${IDENTITY_DIR}/identity.json ] ; then
     deviceID=$(jq -r .deviceID ${IDENTITY_DIR}/identity.json)
+    serialNumber=$(jq -r .serialNumber ${IDENTITY_DIR}/identity.json)
   fi
 }
 
@@ -50,6 +51,7 @@ execute () {
         -g $lwm2mserveruri\
         -p DEV0\
         -o $OU\
+        -s $serialNumber\
         --temp-cert-dir $(mktemp -d)\
         --identity-dir ${IDENTITY_DIR}\
         --internal-id $internalid
