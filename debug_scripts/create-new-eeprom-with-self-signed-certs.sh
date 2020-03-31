@@ -31,7 +31,9 @@ getEdgeStatus() {
 }
 
 readEeprom() {
-  deviceID=$(jq -r .deviceID ${IDENTITY_DIR}/identity.json)
+  if [ -f ${IDENTITY_DIR}/identity.json ] ; then
+    deviceID=$(jq -r .deviceID ${IDENTITY_DIR}/identity.json)
+  fi
 }
 
 execute () {
@@ -51,9 +53,14 @@ execute () {
         --temp-cert-dir $(mktemp -d)\
         --identity-dir ${IDENTITY_DIR}\
         --internal-id $internalid
+      if [ $? -ne 0 ]; then
+        echo "Error: failed to create developer identity!"
+        exit 1
+      fi
     fi
   else
     echo "Error: edge-core is not connected yet. Its status is- $status. Exited with code $?."
+    exit 1
   fi
 }
 
