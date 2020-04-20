@@ -247,9 +247,6 @@ account(){
 		SN=$serialNumber
 		DID=$deviceID
 		CLOUDURL=$cloudAddress
-		if [[ $CLOUDURL = "https://gateways.mbedcloudstaging.net" ]]; then
-			APICLOUDURL="https://api-os2.mbedcloudstaging.net"
-		fi
 		EDGECORESTATUS=$(curl -s http://localhost:9101/status)
 		AccountID=$(jsonParse $EDGECORESTATUS account-id)
 		Status=$(jsonParse $EDGECORESTATUS status)
@@ -257,7 +254,6 @@ account(){
 		_placeLine "  - Serial Number:" "$SN"
 		_placeLine "  - Device ID:" "$DID"
 		_placeLine "  - Cloud Server:" "$CLOUDURL"
-		_placeLine "  - API Server:" "$APICLOUDURL"
 		_placeLine "  - AccountID:" "$AccountID"
 		_placeLine "  - Status:" "$Status"
 	else
@@ -272,22 +268,16 @@ account(){
 }
 
 hardware(){
-	LEDTYPE="RBG"
-	LEDCONFIG=$ledConfig
 	HWV=$hardwareVersion
-	ETHERNETMAC=$ethernetMAC_string
-	if [[ $LEDCONFIG = "01" ]]; then
-		LEDTYPE="RGB"
-	fi
+	ETHERNETMAC=$("cat /sys/class/net/eth0/address")
 	local CPUCOUNT=$(grep -c processor /proc/cpuinfo)
-	local DIETEMP=$(_exec "cat /sys/devices/virtual/thermal/thermal_zone0/temp")
+	local DIETEMP=$("cat /sys/devices/virtual/thermal/thermal_zone0/temp")
 	if [[ "$DIETEMP" != "" ]]; then
 		DIETEMP=$(_div1000 $DIETEMP)" C"
 	fi
 	_placeTitle "Hardware Infomation"
 	_placeLine "  - Hardware Version:" "$HWV"
 	_placeLine "  - Ethernet Mac:" "$ETHERNETMAC"
-	_placeLine "  - LED Type installed:" "$LEDTYPE ($LEDCONFIG)"
 	_placeLine "  - Physical Memory:" "$MEM MB"
 	_placeLine "  - SOC die tempurature:" "$DIETEMP"
 	_placeLine "  - CPU Count:" "$CPUCOUNT"
