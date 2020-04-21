@@ -1,5 +1,5 @@
 unixLogSocket: /tmp/grease.socket
-sysLogSocket: /dev/log
+sysLogSocket: /run/systemd/journal/syslog
 linuxKernelLog: false
 httpUnixSocket: /tmp/maestroapi.sock
 configDBPath: /var/snap/pelion-edge/current/userdata/etc/maestroConfig.db
