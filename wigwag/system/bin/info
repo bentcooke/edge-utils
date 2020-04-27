@@ -269,9 +269,9 @@ account(){
 
 hardware(){
 	HWV=$hardwareVersion
-	ETHERNETMAC=$("cat /sys/class/net/eth0/address")
+	ETHERNETMAC=$(cat /sys/class/net/eth0/address)
 	local CPUCOUNT=$(grep -c processor /proc/cpuinfo)
-	local DIETEMP=$("cat /sys/devices/virtual/thermal/thermal_zone0/temp")
+	local DIETEMP=$(cat /sys/devices/virtual/thermal/thermal_zone0/temp)
 	if [[ "$DIETEMP" != "" ]]; then
 		DIETEMP=$(_div1000 $DIETEMP)" C"
 	fi
