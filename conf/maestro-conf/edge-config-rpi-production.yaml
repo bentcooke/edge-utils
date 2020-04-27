@@ -15,6 +15,10 @@ network:
           dhcpv4: true
           # set the mac addresses for this interface also:
           hw_addr: "{{ARCH_ETHERNET_MAC}}"
+        - if_name: wlan0
+          clear_addresses: true
+          dhcpv4: true
+          hw_addr: "{{ARCH_ETHERNET_MAC}}"
 processes:
     reaper_interval: 1500
 platform_readers:
