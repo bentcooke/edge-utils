@@ -108,13 +108,12 @@ targets:
      format_tag: "\"tag\":\"%s\", "
      format_origin: "\"origin\":\"%s\", "
      format_pre_msg: "\"text\":\""
+     format_pre: "{"     # you will wrap this output with { "log": [ OUTPUT ] }
      format_post: "\"},"
      flag_json_escape_strings: true
      filters:
        - levels: warn
-         format_pre: "{"     # you will wrap this output with { "log": [ OUTPUT ] }
        - levels: error
-         format_pre: "{"     # you will wrap this output with { "log": [ OUTPUT ] }
 #   - file: "{{TMP_DIR}}/maestro.log"
    # - TTY: "console"
    #   rotate:
