@@ -149,12 +149,18 @@ function findEdgeK8sServiceAddressFromMDS(server_uri) {
 }
 
 function findServiceAddressFromMDS(server_uri, service_name) {
+
     var integrationLab = /.*mds-integration-lab.*/;
+    var newIntegrationLab = /.*lwm2m-integration-lab.*/;
+
     var sysTest4 = /.*mds-syte4-sandbox.*/;
+
     var systemtest = /.*mds-systemtest.*/;
+    var newSystemtest = /.*lwm2m-os2.*/;
+
     var usEast = /.*lwm2m.us-east-1.*/;
     var apNortheast = /.*lwm2m.ap-northeast-1.*/;
-    if (integrationLab.exec(server_uri)) {
+    if (integrationLab.exec(server_uri) || newIntegrationLab.exec(server_uri)) {
         return "https://" + service_name + ".mbedcloudintegration.net";
     } else if (sysTest4.exec(server_uri)) {
         if (service_name === "edge-k8s") {
@@ -162,7 +168,7 @@ function findServiceAddressFromMDS(server_uri, service_name) {
         } else {
             return "https://gateways-syte4-sandbox.mbedcloudintegration.net";
         }
-    } else if (systemtest.exec(server_uri)) {
+    } else if (systemtest.exec(server_uri) || newSystemtest.exec(server_uri)) {
         return "https://" + service_name + ".mbedcloudstaging.net";
     } else if (usEast.exec(server_uri)) {
         return "https://" + service_name + ".us-east-1.mbedcloud.com";
