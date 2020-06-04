@@ -82,6 +82,7 @@ symphony:
     host: "gateways.local"
     url_logs: "http://gateways.local:8080/relay-logs/logs"
     url_stats: "http://gateways.local:8080/relay-stats/stats_obj"
+    send_time_threshold: 120000       # set the send time threshold to 2 minutes
     # port: "{{ARCH_RELAY_SERVICES_PORT}}"
 targets:
    - file: "/var/snap/pelion-edge/current/userdata/maestro.log"
