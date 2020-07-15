@@ -2,7 +2,7 @@ unixLogSocket: /tmp/grease.socket
 sysLogSocket: /run/systemd/journal/syslog
 linuxKernelLog: false
 httpUnixSocket: /tmp/maestroapi.sock
-configDBPath: /var/snap/pelion-edge/current/userdata/etc/maestroConfig.db
+configDBPath: /var/snap/hce-pelion-edge/current/userdata/etc/maestroConfig.db
 imagePath: /tmp/maestro/images
 scratchPath: /tmp/maestro/scratch
 clientId: "{{ARCH_SERIAL_NUMBER}}"
@@ -13,12 +13,12 @@ processes:
 platform_readers:
   - platform: "fsonly"
     params:
-      identityPath: "/var/snap/pelion-edge/current/userdata/edge_gw_identity/identity.json"
+      identityPath: "/var/snap/hce-pelion-edge/current/userdata/edge_gw_identity/identity.json"
 var_defs:
    - key: "SNAP_DATA"
-     value: "/var/snap/pelion-edge/current"
+     value: "/var/snap/hce-pelion-edge/current"
    - key: "SNAP"
-     value: "/snap/pelion-edge/current"
+     value: "/snap/hce-pelion-edge/current"
    - key: "TMP_DIR"
      value: "/tmp"
    - key: "WIGWAG_NODE_PATH"
@@ -38,7 +38,7 @@ var_defs:
    - key: "RELAY_VERSIONS_FILE"
      value: "{{SNAP}}/wigwag/etc/versions.json"
    - key: "FACTORY_VERSIONS_FILE"
-     value: "/snap/pelion-edge/current/wigwag/etc/versions.json"
+     value: "/snap/hce-pelion-edge/current/wigwag/etc/versions.json"
    - key: "USER_VERSIONS_FILE"
      value: "{{SNAP}}/wigwag/etc/versions.json"
    - key: "UPGRADE_VERSIONS_FILE"
@@ -85,7 +85,7 @@ symphony:
     send_time_threshold: 120000       # set the send time threshold to 2 minutes
     # port: "{{ARCH_RELAY_SERVICES_PORT}}"
 targets:
-   - file: "/var/snap/pelion-edge/current/userdata/maestro.log"
+   - file: "/var/snap/hce-pelion-edge/current/userdata/maestro.log"
      rotate:
          max_files: 4
          max_file_size: 10000000  # 10MB max file size
@@ -195,5 +195,5 @@ static_file_generators:
      output_file: "{{SSL_CERTS_PATH}}/ca-chain.cert.pem"
    - name: "relayTerm"
      template_file: "{{SNAP}}/wigwag/wwrelay-utils/conf/maestro-conf/relayTerm.template.json"
-     output_file: "/var/snap/pelion-edge/x1/relayterm-config.json"
+     output_file: "/var/snap/hce-pelion-edge/x1/relayterm-config.json"
 config_end: true
